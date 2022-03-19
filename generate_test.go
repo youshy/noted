@@ -154,6 +154,7 @@ func TestGenerateNeck(t *testing.T) {
 				21: Csharp,
 			},
 		}
+
 		firstStringTuning := E
 		secondStringTuning := B
 		thirdStringTuning := G
@@ -170,6 +171,79 @@ func TestGenerateNeck(t *testing.T) {
 			fourthStringTuning,
 			fifthStringTuning,
 			sixthStringTuning,
+		)
+
+		assert.NoError(t, err)
+		assert.Equal(t, expected, actual)
+	})
+
+	t.Run("Generate neck for drop G, 24 frets, 7 strings", func(t *testing.T) {
+		expected := Neck{
+			FirstString:   String{},
+			SecondString:  String{},
+			ThirdString:   String{},
+			FourthString:  String{},
+			FifthString:   String{},
+			SixthString:   String{},
+			SeventhString: String{},
+		}
+
+		firstStringTuning := D
+		secondStringTuning := A
+		thirdStringTuning := F
+		fourthStringTuning := C
+		fifthStringTuning := G
+		sixthStringTuning := D
+		seventhStringTuning := G
+
+		actual, err := GenerateNeck(
+			SevenString,
+			TwentyFourFrets,
+			firstStringTuning,
+			secondStringTuning,
+			thirdStringTuning,
+			fourthStringTuning,
+			fifthStringTuning,
+			sixthStringTuning,
+			seventhStringTuning,
+		)
+
+		assert.NoError(t, err)
+		assert.Equal(t, expected, actual)
+	})
+
+	t.Run("Generate neck for half-step down, 22 frets, 8 strings", func(t *testing.T) {
+		expected := Neck{
+			FirstString:   String{},
+			SecondString:  String{},
+			ThirdString:   String{},
+			FourthString:  String{},
+			FifthString:   String{},
+			SixthString:   String{},
+			SeventhString: String{},
+			EightString:   String{},
+		}
+
+		firstStringTuning := Dsharp
+		secondStringTuning := Asharp
+		thirdStringTuning := Fsharp
+		fourthStringTuning := Csharp
+		fifthStringTuning := Gsharp
+		sixthStringTuning := Dsharp
+		seventhStringTuning := Asharp
+		eightStringTuning := F
+
+		actual, err := GenerateNeck(
+			EightString,
+			TwentyTwoFrets,
+			firstStringTuning,
+			secondStringTuning,
+			thirdStringTuning,
+			fourthStringTuning,
+			fifthStringTuning,
+			sixthStringTuning,
+			seventhStringTuning,
+			eightStringTuning,
 		)
 
 		assert.NoError(t, err)
