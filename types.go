@@ -1,7 +1,16 @@
 package notes
 
-// Note symbolises all available notes, calculated as semitones
-type Note int
+// Pitch symbolises all available pitches in twelve-tone system
+type Pitch int
+
+// PitchOctave symbolises all available octaves for a single note
+type PitchOctave int
+
+// Note symbolises all available notes within all available octaves
+type Note struct {
+	Pitch       Pitch
+	PitchOctave PitchOctave
+}
 
 // Fret symbolises the fret on a guitar
 type Fret int
@@ -29,8 +38,14 @@ type Neck struct {
 	EightString   String
 }
 
+// Interval depict all available intervals within one octave
+type Interval int
+
+// Notes is a collection of all notes generated from root
+type Notes []Note
+
 const (
-	C Note = iota
+	C Pitch = iota
 	Csharp
 	D
 	Dsharp
@@ -60,9 +75,6 @@ const (
 	TwentySevenFrets // Because Majesty II has 27, I want to be able to use them all...
 )
 
-// Interval depict all available intervals within one octave
-type Interval int
-
 const (
 	Root Interval = iota
 	MinorSecond
@@ -79,5 +91,16 @@ const (
 	Octave
 )
 
-// Notes is a collection of all notes generated from root
-type Notes []Note
+const (
+	MinusOneOctave PitchOctave = iota - 1
+	ZeroOctave
+	FirstOctave
+	SecondOctave
+	ThirdOctave
+	FourthOctave
+	FifthOctave
+	SixthOctave
+	SeventhOctave
+	EightOctave
+	NinthOctave
+)
