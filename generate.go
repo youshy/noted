@@ -60,15 +60,16 @@ func generateString(
 		currentFret  Fret
 	)
 
-	allNotesFromRoot := generateAllNotesFromRootWithinSingleOctave(rootNote)
+	currentNote = rootNote
 
 	for i := 0; i <= int(frets); i++ {
-		singleString[currentFret] = allNotesFromRoot[currentNote]
+		singleString[currentFret] = currentNote
 		currentFret++
-		currentNote++
+		currentNote.Pitch++
 
-		if currentNote == 12 {
-			currentNote = 0
+		if currentNote.Pitch == 12 {
+			currentNote.Pitch = 0
+			currentNote.PitchOctave++
 		}
 	}
 
@@ -85,10 +86,11 @@ func generateAllNotesFromRootWithinSingleOctave(rootNote Note) Notes {
 
 	for i := Root; i < Octave; i++ {
 		notes = append(notes, currentNote)
-		currentNote++
+		currentNote.Pitch++
 
-		if currentNote == 12 {
-			currentNote = 0
+		if currentNote.Pitch == 12 {
+			currentNote.Pitch = 0
+			currentNote.PitchOctave++
 		}
 	}
 
