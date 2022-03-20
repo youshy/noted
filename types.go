@@ -6,10 +6,13 @@ type Pitch int
 // PitchOctave symbolises all available octaves for a single note
 type PitchOctave int
 
-// Note symbolises all available notes within all available octaves
+// Note symbolises all available notes within all available octaves.
+// IsInScale checks if the note is available in a scale
+// generated for the neck
 type Note struct {
 	Pitch       Pitch
 	PitchOctave PitchOctave
+	IsInScale   bool
 }
 
 // Fret symbolises the fret on a guitar
@@ -43,6 +46,20 @@ type Interval int
 
 // Notes is a collection of all notes generated from root
 type Notes []Note
+
+// Scale symbolises any custom scale that will allow for
+// propagating all available notes on the neck
+type Scale struct {
+	// Name is the name of the scale
+	Name string
+	// Intervals describes how the scale is built within one octave
+	Intervals []Interval
+	// RootNote sets the scale starting point
+	RootNote Note
+	// Notes describes all available notes
+	// within one octave from the Root note
+	Notes Notes
+}
 
 const (
 	C Pitch = iota
